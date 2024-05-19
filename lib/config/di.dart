@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
@@ -14,4 +15,7 @@ void configureDependencies() {
 abstract class ExternalDependencies {
   @singleton
   FirebaseAuth get firebaseAuth => FirebaseAuth.instance;
+
+  @singleton
+  FirebaseFirestore get firestore => FirebaseFirestore.instance;
 }

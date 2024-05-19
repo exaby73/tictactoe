@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:luthor/luthor.dart';
+import 'package:tictactoe/common/data_state.dart';
 import 'package:tictactoe/common/widgets/unfocus.dart';
 import 'package:tictactoe/config/router.dart';
 import 'package:tictactoe/config/router.gr.dart';
 import 'package:tictactoe/pages/auth/forms/auth_form.dart';
 import 'package:tictactoe/state/auth_cubit.dart';
-import 'package:tictactoe/state/auth_state.dart';
 
 @RoutePage()
 class LoginPage extends StatelessWidget {
@@ -38,6 +38,10 @@ class _Body extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final hidePassword = useState(true);
+
+    final isLoading = context.select(
+      (AuthCubit c) => c.state.loginState is DataStateLoading,
+    );
 
     return ListView(
       shrinkWrap: true,
@@ -90,7 +94,7 @@ class _Body extends HookWidget {
               child: const Text('Don\t have an account? Register'),
             ),
             ElevatedButton(
-              onPressed: () => _login(context),
+              onPressed: isLoading ? null : () => _login(context),
               child: const Text('Login'),
             ),
           ],
@@ -107,9 +111,9 @@ class _Body extends HookWidget {
     final loginResult = await context.read<AuthCubit>().login(body);
     if (!context.mounted) return;
     switch (loginResult) {
-      case AuthDataSuccess():
+      case DataStateSuccess():
         router.pushAndPopUntil(const HomeRoute(), predicate: (_) => false);
-      case AuthDataFailure(failure: final f):
+      case DataStateFailure(failure: final f):
         ScaffoldMessenger.of(context)
           ..removeCurrentSnackBar()
           ..showSnackBar(SnackBar(content: Text(f.messageOrDefault)));

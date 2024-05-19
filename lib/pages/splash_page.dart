@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:tictactoe/common/data_state.dart';
 import 'package:tictactoe/config/router.dart';
 import 'package:tictactoe/config/router.gr.dart';
 import 'package:tictactoe/state/auth_cubit.dart';
-import 'package:tictactoe/state/auth_state.dart';
 
 @RoutePage()
 class SplashPage extends HookWidget {
@@ -20,10 +20,16 @@ class SplashPage extends HookWidget {
           (timeStamp) {
             final loginState = context.read<AuthCubit>().init();
             switch (loginState) {
-              case AuthDataSuccess():
-                router.popAndPush(const HomeRoute());
+              case DataStateSuccess():
+                router.pushAndPopUntil(
+                  const HomeRoute(),
+                  predicate: (_) => false,
+                );
               case _:
-                router.popAndPush(const LoginRoute());
+                router.pushAndPopUntil(
+                  const LoginRoute(),
+                  predicate: (_) => false,
+                );
             }
           },
         );

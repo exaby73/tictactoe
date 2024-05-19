@@ -24,7 +24,7 @@ class AuthService {
 
       return right(user);
     } on FirebaseAuthException catch (e) {
-      return _handleFirebaseException(e);
+      return left(_handleFirebaseException(e));
     } catch (e) {
       return left(const Failure.unknownError());
     }
@@ -44,13 +44,13 @@ class AuthService {
 
       return right(user);
     } on FirebaseAuthException catch (e) {
-      return _handleFirebaseException(e);
+      return left(_handleFirebaseException(e));
     } catch (e) {
       return left(const Failure.unknownError());
     }
   }
 
-  Either<Failure, T> _handleFirebaseException<T>(FirebaseAuthException e) {
+  Failure _handleFirebaseException(FirebaseAuthException e) {
     final FirebaseAuthException(:code) = e;
     return switch (code) {
       'email-already-in-use' ||
@@ -59,18 +59,12 @@ class AuthService {
       'wrong-password' ||
       'invalid-credential' ||
       'user-disabled' =>
-        left(const Failure.badRequest('Invalid email or password.')),
-      'account-exists-with-different-credential' => left(
-          const Failure.badRequest(
-            'Account exists with different credential.',
-          ),
+        const Failure.badRequest('Invalid email or password.'),
+      'account-exists-with-different-credential' => const Failure.badRequest(
+          'Account exists with different credential.',
         ),
-      'weak-password' => left(const Failure.badRequest('Weak password.')),
-      _ => left(
-          Failure.unknownError(
-            'An error occured while logging in. Code: $code',
-          ),
-        ),
+      'weak-password' => const Failure.badRequest('Weak password.'),
+      _ => Failure.unknownError('An error occured. Code: $code'),
     };
   }
 }

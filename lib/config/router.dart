@@ -26,6 +26,10 @@ class AppRouter extends $AppRouter {
         path: '/home',
         page: HomeRoute.page,
       ),
+      AutoRoute(
+        path: '/game',
+        page: GameRoute.page,
+      ),
     ];
   }
 }
