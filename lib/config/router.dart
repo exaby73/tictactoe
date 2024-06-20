@@ -27,6 +27,10 @@ class AppRouter extends $AppRouter {
         page: HomeRoute.page,
       ),
       AutoRoute(
+        path: '/create_or_join_game',
+        page: CreateOrJoinGameRoute.page,
+      ),
+      AutoRoute(
         path: '/game',
         page: GameRoute.page,
       ),

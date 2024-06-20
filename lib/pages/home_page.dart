@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:tictactoe/common/data_state.dart';
@@ -79,8 +80,13 @@ class HomePage extends HookWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Create new game',
+        onPressed: () async {
+          final gameStream =
+              await router.push<Stream<Game>>(const CreateOrJoinGameRoute());
+          if (gameStream == null) return;
+          router.push(GameRoute(gameStream: gameStream));
+        },
+        tooltip: 'Create or Join Game',
         child: const Icon(Icons.add),
       ),
       body: const _GamesList(),
@@ -138,8 +144,38 @@ class _GamesData extends StatelessWidget {
           final game = games[index];
           return ListTile(
             title: Text(game.id),
-            onTap: () {
-              throw UnimplementedError();
+            onTap: () async {
+              final g =
+                  await context.read<GameCubit>().getGameByGameId(game.id);
+
+              if (!context.mounted) return;
+
+              switch (g) {
+                case DataStateSuccess(data: final gameStream):
+                  router.push(GameRoute(gameStream: gameStream));
+                  context.read<GameCubit>().getGames();
+                  context.read<GameCubit>().resetGetGameByGameIdState();
+                case DataStateFailure(failure: final f):
+                  ScaffoldMessenger.of(context)
+                    ..removeCurrentSnackBar()
+                    ..showSnackBar(
+                      SnackBar(
+                        content: Text(f.messageOrDefault),
+                      ),
+                    );
+                case _:
+              }
+            },
+            onLongPress: () async {
+              await Clipboard.setData(ClipboardData(text: game.id));
+              if (!context.mounted) return;
+              ScaffoldMessenger.of(context)
+                ..removeCurrentSnackBar()
+                ..showSnackBar(
+                  const SnackBar(
+                    content: Text('Game ID copied to clipboard'),
+                  ),
+                );
             },
           );
         },

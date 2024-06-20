@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/common/failure.dart';
@@ -51,6 +52,7 @@ class AuthService {
   }
 
   Failure _handleFirebaseException(FirebaseAuthException e) {
+    debugPrint('FirebaseAuthException: $e');
     final FirebaseAuthException(:code) = e;
     return switch (code) {
       'email-already-in-use' ||

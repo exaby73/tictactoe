@@ -22,11 +22,15 @@ Game _$GameFromJson(Map<String, dynamic> json) {
 mixin _$Game {
   String get id => throw _privateConstructorUsedError;
   String get player1 => throw _privateConstructorUsedError;
-  String get player2 => throw _privateConstructorUsedError;
+  String? get player2 => throw _privateConstructorUsedError;
   bool get player1Ready => throw _privateConstructorUsedError;
   bool get player2Ready => throw _privateConstructorUsedError;
   bool get isPlayer1Turn => throw _privateConstructorUsedError;
-  List<List<Cell>> get board => throw _privateConstructorUsedError;
+  Cell get player1Symbol => throw _privateConstructorUsedError;
+  Cell get player2Symbol => throw _privateConstructorUsedError;
+  @BoardConverter()
+  Board get board => throw _privateConstructorUsedError;
+  GameStatus get status => throw _privateConstructorUsedError;
   GameResult get result => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -44,13 +48,18 @@ abstract class $GameCopyWith<$Res> {
   $Res call(
       {String id,
       String player1,
-      String player2,
+      String? player2,
       bool player1Ready,
       bool player2Ready,
       bool isPlayer1Turn,
-      List<List<Cell>> board,
+      Cell player1Symbol,
+      Cell player2Symbol,
+      @BoardConverter() Board board,
+      GameStatus status,
       GameResult result,
       @TimestampConverter() DateTime createdAt});
+
+  $BoardCopyWith<$Res> get board;
 }
 
 /// @nodoc
@@ -68,11 +77,14 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
   $Res call({
     Object? id = null,
     Object? player1 = null,
-    Object? player2 = null,
+    Object? player2 = freezed,
     Object? player1Ready = null,
     Object? player2Ready = null,
     Object? isPlayer1Turn = null,
+    Object? player1Symbol = null,
+    Object? player2Symbol = null,
     Object? board = null,
+    Object? status = null,
     Object? result = null,
     Object? createdAt = null,
   }) {
@@ -85,10 +97,10 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
           ? _value.player1
           : player1 // ignore: cast_nullable_to_non_nullable
               as String,
-      player2: null == player2
+      player2: freezed == player2
           ? _value.player2
           : player2 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       player1Ready: null == player1Ready
           ? _value.player1Ready
           : player1Ready // ignore: cast_nullable_to_non_nullable
@@ -101,10 +113,22 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
           ? _value.isPlayer1Turn
           : isPlayer1Turn // ignore: cast_nullable_to_non_nullable
               as bool,
+      player1Symbol: null == player1Symbol
+          ? _value.player1Symbol
+          : player1Symbol // ignore: cast_nullable_to_non_nullable
+              as Cell,
+      player2Symbol: null == player2Symbol
+          ? _value.player2Symbol
+          : player2Symbol // ignore: cast_nullable_to_non_nullable
+              as Cell,
       board: null == board
           ? _value.board
           : board // ignore: cast_nullable_to_non_nullable
-              as List<List<Cell>>,
+              as Board,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as GameStatus,
       result: null == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
@@ -114,6 +138,14 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BoardCopyWith<$Res> get board {
+    return $BoardCopyWith<$Res>(_value.board, (value) {
+      return _then(_value.copyWith(board: value) as $Val);
+    });
   }
 }
 
@@ -127,13 +159,19 @@ abstract class _$$GameImplCopyWith<$Res> implements $GameCopyWith<$Res> {
   $Res call(
       {String id,
       String player1,
-      String player2,
+      String? player2,
       bool player1Ready,
       bool player2Ready,
       bool isPlayer1Turn,
-      List<List<Cell>> board,
+      Cell player1Symbol,
+      Cell player2Symbol,
+      @BoardConverter() Board board,
+      GameStatus status,
       GameResult result,
       @TimestampConverter() DateTime createdAt});
+
+  @override
+  $BoardCopyWith<$Res> get board;
 }
 
 /// @nodoc
@@ -148,11 +186,14 @@ class __$$GameImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? player1 = null,
-    Object? player2 = null,
+    Object? player2 = freezed,
     Object? player1Ready = null,
     Object? player2Ready = null,
     Object? isPlayer1Turn = null,
+    Object? player1Symbol = null,
+    Object? player2Symbol = null,
     Object? board = null,
+    Object? status = null,
     Object? result = null,
     Object? createdAt = null,
   }) {
@@ -165,10 +206,10 @@ class __$$GameImplCopyWithImpl<$Res>
           ? _value.player1
           : player1 // ignore: cast_nullable_to_non_nullable
               as String,
-      player2: null == player2
+      player2: freezed == player2
           ? _value.player2
           : player2 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       player1Ready: null == player1Ready
           ? _value.player1Ready
           : player1Ready // ignore: cast_nullable_to_non_nullable
@@ -181,10 +222,22 @@ class __$$GameImplCopyWithImpl<$Res>
           ? _value.isPlayer1Turn
           : isPlayer1Turn // ignore: cast_nullable_to_non_nullable
               as bool,
+      player1Symbol: null == player1Symbol
+          ? _value.player1Symbol
+          : player1Symbol // ignore: cast_nullable_to_non_nullable
+              as Cell,
+      player2Symbol: null == player2Symbol
+          ? _value.player2Symbol
+          : player2Symbol // ignore: cast_nullable_to_non_nullable
+              as Cell,
       board: null == board
-          ? _value._board
+          ? _value.board
           : board // ignore: cast_nullable_to_non_nullable
-              as List<List<Cell>>,
+              as Board,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as GameStatus,
       result: null == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
@@ -199,18 +252,25 @@ class __$$GameImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GameImpl implements _Game {
+class _$GameImpl extends _Game {
   const _$GameImpl(
       {required this.id,
       required this.player1,
-      required this.player2,
-      required this.player1Ready,
-      required this.player2Ready,
-      required this.isPlayer1Turn,
-      final List<List<Cell>> board = const [],
+      this.player2,
+      this.player1Ready = false,
+      this.player2Ready = false,
+      this.isPlayer1Turn = true,
+      required this.player1Symbol,
+      required this.player2Symbol,
+      @BoardConverter() required this.board,
+      this.status = GameStatus.waiting,
       this.result = GameResult.none,
       @TimestampConverter() required this.createdAt})
-      : _board = board;
+      : assert(player1Symbol != Cell.empty, 'Player 1 symbol cannot be empty'),
+        assert(player2Symbol != Cell.empty, 'Player 2 symbol cannot be empty'),
+        assert(player1Symbol != player2Symbol,
+            'Player 1 and Player 2 symbols cannot be the same'),
+        super._();
 
   factory _$GameImpl.fromJson(Map<String, dynamic> json) =>
       _$$GameImplFromJson(json);
@@ -220,22 +280,26 @@ class _$GameImpl implements _Game {
   @override
   final String player1;
   @override
-  final String player2;
-  @override
-  final bool player1Ready;
-  @override
-  final bool player2Ready;
-  @override
-  final bool isPlayer1Turn;
-  final List<List<Cell>> _board;
+  final String? player2;
   @override
   @JsonKey()
-  List<List<Cell>> get board {
-    if (_board is EqualUnmodifiableListView) return _board;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_board);
-  }
-
+  final bool player1Ready;
+  @override
+  @JsonKey()
+  final bool player2Ready;
+  @override
+  @JsonKey()
+  final bool isPlayer1Turn;
+  @override
+  final Cell player1Symbol;
+  @override
+  final Cell player2Symbol;
+  @override
+  @BoardConverter()
+  final Board board;
+  @override
+  @JsonKey()
+  final GameStatus status;
   @override
   @JsonKey()
   final GameResult result;
@@ -245,7 +309,7 @@ class _$GameImpl implements _Game {
 
   @override
   String toString() {
-    return 'Game(id: $id, player1: $player1, player2: $player2, player1Ready: $player1Ready, player2Ready: $player2Ready, isPlayer1Turn: $isPlayer1Turn, board: $board, result: $result, createdAt: $createdAt)';
+    return 'Game(id: $id, player1: $player1, player2: $player2, player1Ready: $player1Ready, player2Ready: $player2Ready, isPlayer1Turn: $isPlayer1Turn, player1Symbol: $player1Symbol, player2Symbol: $player2Symbol, board: $board, status: $status, result: $result, createdAt: $createdAt)';
   }
 
   @override
@@ -262,7 +326,12 @@ class _$GameImpl implements _Game {
                 other.player2Ready == player2Ready) &&
             (identical(other.isPlayer1Turn, isPlayer1Turn) ||
                 other.isPlayer1Turn == isPlayer1Turn) &&
-            const DeepCollectionEquality().equals(other._board, _board) &&
+            (identical(other.player1Symbol, player1Symbol) ||
+                other.player1Symbol == player1Symbol) &&
+            (identical(other.player2Symbol, player2Symbol) ||
+                other.player2Symbol == player2Symbol) &&
+            (identical(other.board, board) || other.board == board) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.result, result) || other.result == result) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
@@ -278,7 +347,10 @@ class _$GameImpl implements _Game {
       player1Ready,
       player2Ready,
       isPlayer1Turn,
-      const DeepCollectionEquality().hash(_board),
+      player1Symbol,
+      player2Symbol,
+      board,
+      status,
       result,
       createdAt);
 
@@ -296,17 +368,21 @@ class _$GameImpl implements _Game {
   }
 }
 
-abstract class _Game implements Game {
+abstract class _Game extends Game {
   const factory _Game(
       {required final String id,
       required final String player1,
-      required final String player2,
-      required final bool player1Ready,
-      required final bool player2Ready,
-      required final bool isPlayer1Turn,
-      final List<List<Cell>> board,
+      final String? player2,
+      final bool player1Ready,
+      final bool player2Ready,
+      final bool isPlayer1Turn,
+      required final Cell player1Symbol,
+      required final Cell player2Symbol,
+      @BoardConverter() required final Board board,
+      final GameStatus status,
       final GameResult result,
       @TimestampConverter() required final DateTime createdAt}) = _$GameImpl;
+  const _Game._() : super._();
 
   factory _Game.fromJson(Map<String, dynamic> json) = _$GameImpl.fromJson;
 
@@ -315,7 +391,7 @@ abstract class _Game implements Game {
   @override
   String get player1;
   @override
-  String get player2;
+  String? get player2;
   @override
   bool get player1Ready;
   @override
@@ -323,7 +399,14 @@ abstract class _Game implements Game {
   @override
   bool get isPlayer1Turn;
   @override
-  List<List<Cell>> get board;
+  Cell get player1Symbol;
+  @override
+  Cell get player2Symbol;
+  @override
+  @BoardConverter()
+  Board get board;
+  @override
+  GameStatus get status;
   @override
   GameResult get result;
   @override
@@ -332,5 +415,148 @@ abstract class _Game implements Game {
   @override
   @JsonKey(ignore: true)
   _$$GameImplCopyWith<_$GameImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Board _$BoardFromJson(Map<String, dynamic> json) {
+  return _Board.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Board {
+  List<List<Cell>> get cellMatrix => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $BoardCopyWith<Board> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BoardCopyWith<$Res> {
+  factory $BoardCopyWith(Board value, $Res Function(Board) then) =
+      _$BoardCopyWithImpl<$Res, Board>;
+  @useResult
+  $Res call({List<List<Cell>> cellMatrix});
+}
+
+/// @nodoc
+class _$BoardCopyWithImpl<$Res, $Val extends Board>
+    implements $BoardCopyWith<$Res> {
+  _$BoardCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cellMatrix = null,
+  }) {
+    return _then(_value.copyWith(
+      cellMatrix: null == cellMatrix
+          ? _value.cellMatrix
+          : cellMatrix // ignore: cast_nullable_to_non_nullable
+              as List<List<Cell>>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BoardImplCopyWith<$Res> implements $BoardCopyWith<$Res> {
+  factory _$$BoardImplCopyWith(
+          _$BoardImpl value, $Res Function(_$BoardImpl) then) =
+      __$$BoardImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<List<Cell>> cellMatrix});
+}
+
+/// @nodoc
+class __$$BoardImplCopyWithImpl<$Res>
+    extends _$BoardCopyWithImpl<$Res, _$BoardImpl>
+    implements _$$BoardImplCopyWith<$Res> {
+  __$$BoardImplCopyWithImpl(
+      _$BoardImpl _value, $Res Function(_$BoardImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cellMatrix = null,
+  }) {
+    return _then(_$BoardImpl(
+      cellMatrix: null == cellMatrix
+          ? _value._cellMatrix
+          : cellMatrix // ignore: cast_nullable_to_non_nullable
+              as List<List<Cell>>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BoardImpl extends _Board {
+  const _$BoardImpl({required final List<List<Cell>> cellMatrix})
+      : _cellMatrix = cellMatrix,
+        super._();
+
+  factory _$BoardImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BoardImplFromJson(json);
+
+  final List<List<Cell>> _cellMatrix;
+  @override
+  List<List<Cell>> get cellMatrix {
+    if (_cellMatrix is EqualUnmodifiableListView) return _cellMatrix;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_cellMatrix);
+  }
+
+  @override
+  String toString() {
+    return 'Board(cellMatrix: $cellMatrix)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BoardImpl &&
+            const DeepCollectionEquality()
+                .equals(other._cellMatrix, _cellMatrix));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_cellMatrix));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BoardImplCopyWith<_$BoardImpl> get copyWith =>
+      __$$BoardImplCopyWithImpl<_$BoardImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BoardImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Board extends Board {
+  const factory _Board({required final List<List<Cell>> cellMatrix}) =
+      _$BoardImpl;
+  const _Board._() : super._();
+
+  factory _Board.fromJson(Map<String, dynamic> json) = _$BoardImpl.fromJson;
+
+  @override
+  List<List<Cell>> get cellMatrix;
+  @override
+  @JsonKey(ignore: true)
+  _$$BoardImplCopyWith<_$BoardImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -4,6 +4,8 @@ part 'failure.freezed.dart';
 
 @freezed
 sealed class Failure with _$Failure {
+  const factory Failure.notFound() = NotFound;
+
   const factory Failure.networkError() = NetworkError;
 
   const factory Failure.badRequest(String message) = BadRequest;
@@ -16,6 +18,7 @@ sealed class Failure with _$Failure {
 
   String get messageOrDefault {
     return switch (this) {
+      NotFound() => 'Resource not found.',
       NetworkError() => 'Please check your internet connection and try again.',
       BadRequest(message: final m) => m,
       UnknownError(message: final m) => m ?? 'An unknown error occurred.',

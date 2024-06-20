@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() notFound,
     required TResult Function() networkError,
     required TResult Function(String message) badRequest,
     required TResult Function(String? message) unknownError,
@@ -26,6 +27,7 @@ mixin _$Failure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? notFound,
     TResult? Function()? networkError,
     TResult? Function(String message)? badRequest,
     TResult? Function(String? message)? unknownError,
@@ -34,6 +36,7 @@ mixin _$Failure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? notFound,
     TResult Function()? networkError,
     TResult Function(String message)? badRequest,
     TResult Function(String? message)? unknownError,
@@ -43,6 +46,7 @@ mixin _$Failure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(NotFound value) notFound,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(BadRequest value) badRequest,
     required TResult Function(UnknownError value) unknownError,
@@ -51,6 +55,7 @@ mixin _$Failure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NotFound value)? notFound,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(BadRequest value)? badRequest,
     TResult? Function(UnknownError value)? unknownError,
@@ -59,6 +64,7 @@ mixin _$Failure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(NotFound value)? notFound,
     TResult Function(NetworkError value)? networkError,
     TResult Function(BadRequest value)? badRequest,
     TResult Function(UnknownError value)? unknownError,
@@ -83,6 +89,127 @@ class _$FailureCopyWithImpl<$Res, $Val extends Failure>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$NotFoundImplCopyWith<$Res> {
+  factory _$$NotFoundImplCopyWith(
+          _$NotFoundImpl value, $Res Function(_$NotFoundImpl) then) =
+      __$$NotFoundImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$NotFoundImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$NotFoundImpl>
+    implements _$$NotFoundImplCopyWith<$Res> {
+  __$$NotFoundImplCopyWithImpl(
+      _$NotFoundImpl _value, $Res Function(_$NotFoundImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$NotFoundImpl extends NotFound {
+  const _$NotFoundImpl() : super._();
+
+  @override
+  String toString() {
+    return 'Failure.notFound()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$NotFoundImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() notFound,
+    required TResult Function() networkError,
+    required TResult Function(String message) badRequest,
+    required TResult Function(String? message) unknownError,
+    required TResult Function(String? message) serverError,
+  }) {
+    return notFound();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? notFound,
+    TResult? Function()? networkError,
+    TResult? Function(String message)? badRequest,
+    TResult? Function(String? message)? unknownError,
+    TResult? Function(String? message)? serverError,
+  }) {
+    return notFound?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? notFound,
+    TResult Function()? networkError,
+    TResult Function(String message)? badRequest,
+    TResult Function(String? message)? unknownError,
+    TResult Function(String? message)? serverError,
+    required TResult orElse(),
+  }) {
+    if (notFound != null) {
+      return notFound();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(NotFound value) notFound,
+    required TResult Function(NetworkError value) networkError,
+    required TResult Function(BadRequest value) badRequest,
+    required TResult Function(UnknownError value) unknownError,
+    required TResult Function(ServerError value) serverError,
+  }) {
+    return notFound(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NotFound value)? notFound,
+    TResult? Function(NetworkError value)? networkError,
+    TResult? Function(BadRequest value)? badRequest,
+    TResult? Function(UnknownError value)? unknownError,
+    TResult? Function(ServerError value)? serverError,
+  }) {
+    return notFound?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(NotFound value)? notFound,
+    TResult Function(NetworkError value)? networkError,
+    TResult Function(BadRequest value)? badRequest,
+    TResult Function(UnknownError value)? unknownError,
+    TResult Function(ServerError value)? serverError,
+    required TResult orElse(),
+  }) {
+    if (notFound != null) {
+      return notFound(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NotFound extends Failure {
+  const factory NotFound() = _$NotFoundImpl;
+  const NotFound._() : super._();
 }
 
 /// @nodoc
@@ -123,6 +250,7 @@ class _$NetworkErrorImpl extends NetworkError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() notFound,
     required TResult Function() networkError,
     required TResult Function(String message) badRequest,
     required TResult Function(String? message) unknownError,
@@ -134,6 +262,7 @@ class _$NetworkErrorImpl extends NetworkError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? notFound,
     TResult? Function()? networkError,
     TResult? Function(String message)? badRequest,
     TResult? Function(String? message)? unknownError,
@@ -145,6 +274,7 @@ class _$NetworkErrorImpl extends NetworkError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? notFound,
     TResult Function()? networkError,
     TResult Function(String message)? badRequest,
     TResult Function(String? message)? unknownError,
@@ -160,6 +290,7 @@ class _$NetworkErrorImpl extends NetworkError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(NotFound value) notFound,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(BadRequest value) badRequest,
     required TResult Function(UnknownError value) unknownError,
@@ -171,6 +302,7 @@ class _$NetworkErrorImpl extends NetworkError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NotFound value)? notFound,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(BadRequest value)? badRequest,
     TResult? Function(UnknownError value)? unknownError,
@@ -182,6 +314,7 @@ class _$NetworkErrorImpl extends NetworkError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(NotFound value)? notFound,
     TResult Function(NetworkError value)? networkError,
     TResult Function(BadRequest value)? badRequest,
     TResult Function(UnknownError value)? unknownError,
@@ -264,6 +397,7 @@ class _$BadRequestImpl extends BadRequest {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() notFound,
     required TResult Function() networkError,
     required TResult Function(String message) badRequest,
     required TResult Function(String? message) unknownError,
@@ -275,6 +409,7 @@ class _$BadRequestImpl extends BadRequest {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? notFound,
     TResult? Function()? networkError,
     TResult? Function(String message)? badRequest,
     TResult? Function(String? message)? unknownError,
@@ -286,6 +421,7 @@ class _$BadRequestImpl extends BadRequest {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? notFound,
     TResult Function()? networkError,
     TResult Function(String message)? badRequest,
     TResult Function(String? message)? unknownError,
@@ -301,6 +437,7 @@ class _$BadRequestImpl extends BadRequest {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(NotFound value) notFound,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(BadRequest value) badRequest,
     required TResult Function(UnknownError value) unknownError,
@@ -312,6 +449,7 @@ class _$BadRequestImpl extends BadRequest {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NotFound value)? notFound,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(BadRequest value)? badRequest,
     TResult? Function(UnknownError value)? unknownError,
@@ -323,6 +461,7 @@ class _$BadRequestImpl extends BadRequest {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(NotFound value)? notFound,
     TResult Function(NetworkError value)? networkError,
     TResult Function(BadRequest value)? badRequest,
     TResult Function(UnknownError value)? unknownError,
@@ -410,6 +549,7 @@ class _$UnknownErrorImpl extends UnknownError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() notFound,
     required TResult Function() networkError,
     required TResult Function(String message) badRequest,
     required TResult Function(String? message) unknownError,
@@ -421,6 +561,7 @@ class _$UnknownErrorImpl extends UnknownError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? notFound,
     TResult? Function()? networkError,
     TResult? Function(String message)? badRequest,
     TResult? Function(String? message)? unknownError,
@@ -432,6 +573,7 @@ class _$UnknownErrorImpl extends UnknownError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? notFound,
     TResult Function()? networkError,
     TResult Function(String message)? badRequest,
     TResult Function(String? message)? unknownError,
@@ -447,6 +589,7 @@ class _$UnknownErrorImpl extends UnknownError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(NotFound value) notFound,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(BadRequest value) badRequest,
     required TResult Function(UnknownError value) unknownError,
@@ -458,6 +601,7 @@ class _$UnknownErrorImpl extends UnknownError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NotFound value)? notFound,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(BadRequest value)? badRequest,
     TResult? Function(UnknownError value)? unknownError,
@@ -469,6 +613,7 @@ class _$UnknownErrorImpl extends UnknownError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(NotFound value)? notFound,
     TResult Function(NetworkError value)? networkError,
     TResult Function(BadRequest value)? badRequest,
     TResult Function(UnknownError value)? unknownError,
@@ -556,6 +701,7 @@ class _$ServerErrorImpl extends ServerError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() notFound,
     required TResult Function() networkError,
     required TResult Function(String message) badRequest,
     required TResult Function(String? message) unknownError,
@@ -567,6 +713,7 @@ class _$ServerErrorImpl extends ServerError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? notFound,
     TResult? Function()? networkError,
     TResult? Function(String message)? badRequest,
     TResult? Function(String? message)? unknownError,
@@ -578,6 +725,7 @@ class _$ServerErrorImpl extends ServerError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? notFound,
     TResult Function()? networkError,
     TResult Function(String message)? badRequest,
     TResult Function(String? message)? unknownError,
@@ -593,6 +741,7 @@ class _$ServerErrorImpl extends ServerError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(NotFound value) notFound,
     required TResult Function(NetworkError value) networkError,
     required TResult Function(BadRequest value) badRequest,
     required TResult Function(UnknownError value) unknownError,
@@ -604,6 +753,7 @@ class _$ServerErrorImpl extends ServerError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NotFound value)? notFound,
     TResult? Function(NetworkError value)? networkError,
     TResult? Function(BadRequest value)? badRequest,
     TResult? Function(UnknownError value)? unknownError,
@@ -615,6 +765,7 @@ class _$ServerErrorImpl extends ServerError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(NotFound value)? notFound,
     TResult Function(NetworkError value)? networkError,
     TResult Function(BadRequest value)? badRequest,
     TResult Function(UnknownError value)? unknownError,
