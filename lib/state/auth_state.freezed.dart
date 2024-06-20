@@ -127,8 +127,8 @@ class __$$AuthStateImplCopyWithImpl<$Res>
 
 class _$AuthStateImpl implements _AuthState {
   const _$AuthStateImpl(
-      {this.loginState = const DataState<User>.initial(),
-      this.registerState = const DataState<User>.initial()});
+      {this.loginState = const DataStateInitial<User>(),
+      this.registerState = const DataStateInitial<User>()});
 
   @override
   @JsonKey()

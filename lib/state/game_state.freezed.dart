@@ -105,7 +105,7 @@ class __$$GameStateImplCopyWithImpl<$Res>
 
 class _$GameStateImpl implements _GameState {
   const _$GameStateImpl(
-      {this.getGamesState = const DataState<List<Game>>.loading()});
+      {this.getGamesState = const DataStateLoading<List<Game>>()});
 
   @override
   @JsonKey()

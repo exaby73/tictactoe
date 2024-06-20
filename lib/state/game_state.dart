@@ -7,7 +7,7 @@ part 'game_state.freezed.dart';
 @freezed
 class GameState with _$GameState {
   const factory GameState({
-    @Default(DataState<List<Game>>.loading())
+    @Default(DataStateLoading<List<Game>>())
     DataState<List<Game>> getGamesState,
   }) = _GameState;
 }

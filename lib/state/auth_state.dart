@@ -7,7 +7,7 @@ part 'auth_state.freezed.dart';
 @freezed
 class AuthState with _$AuthState {
   const factory AuthState({
-    @Default(DataState<User>.initial()) DataState<User> loginState,
-    @Default(DataState<User>.initial()) DataState<User> registerState,
+    @Default(DataStateInitial<User>()) DataState<User> loginState,
+    @Default(DataStateInitial<User>()) DataState<User> registerState,
   }) = _AuthState;
 }
